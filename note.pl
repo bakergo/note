@@ -7,6 +7,7 @@ use strict;
 use version; our $VERSION = version->declare('v0.0');
 use Env qw(HOME);
 use File::Basename;
+use File::Path qw(make_path);
 use File::Spec::Functions;
 
 sub usage {
@@ -28,6 +29,7 @@ while (@ARGV) {
 		push @topics, catfile($notes, $subject, $arg) if $subject;
 	}
 }
+make_path(dirname($_)) for (@topics);
 
 exec 'sensible-editor', @topics if (@topics);
 usage(0);
