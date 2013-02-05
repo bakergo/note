@@ -11,7 +11,7 @@ use File::Path qw(make_path);
 use File::Spec::Functions;
 
 sub usage {
-	print "usage: ". basename($0) ." [-s <subject>] <topic>\n";
+	print "usage: ". basename($0) ." [-l]  [-h] [-s <subject>] <topic>\n";
 	exit shift;
 } 
 
@@ -24,6 +24,12 @@ while (@ARGV) {
 		$subject = shift or die "Expect a subject after -s";
 	} elsif ($arg =~ /-h/) {
 		usage(0);
+	} elsif ($arg =~ /-l/) {
+		if ($subject) {
+			print "$_\n" foreach glob(catfile($notes, $subject, '*'));
+		} else {
+			print "$_\n" foreach glob(catfile($notes, '*'));
+		}
 	} else {
 		push @topics, catfile($notes, $arg) unless $subject;
 		push @topics, catfile($notes, $subject, $arg) if $subject;
