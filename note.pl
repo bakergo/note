@@ -20,11 +20,11 @@ my @topics = ();
 my $subject = undef;
 while (@ARGV) {
 	my $arg = shift;
-	if ($arg =~ /-s/) {
+	if ($arg =~ /^--?s(ubject)?$/) {
 		$subject = shift or die "Expect a subject after -s";
-	} elsif ($arg =~ /-h/) {
+	} elsif ($arg =~ /^--?h(elp)?$/) {
 		usage(0);
-	} elsif ($arg =~ /-l/) {
+	} elsif ($arg =~ /^--?l(ist)?$/) {
 		print "$_\n" foreach glob(catfile($notes, $subject, '*'));
 	} else {
 		push @topics, catfile($notes, $arg) unless $subject;
