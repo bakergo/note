@@ -25,11 +25,7 @@ while (@ARGV) {
 	} elsif ($arg =~ /-h/) {
 		usage(0);
 	} elsif ($arg =~ /-l/) {
-		if ($subject) {
-			print "$_\n" foreach glob(catfile($notes, $subject, '*'));
-		} else {
-			print "$_\n" foreach glob(catfile($notes, '*'));
-		}
+		print "$_\n" foreach glob(catfile($notes, $subject, '*'));
 	} else {
 		push @topics, catfile($notes, $arg) unless $subject;
 		push @topics, catfile($notes, $subject, $arg) if $subject;
