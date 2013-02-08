@@ -10,6 +10,8 @@ use File::Basename;
 use File::Path qw(make_path);
 use File::Spec::Functions;
 
+my $editor = $ENV{EDITOR} || 'sensible-editor';
+
 sub usage {
 	print "usage: ". basename($0) ." [-l]  [-h] [-s <subject>] <topic>\n";
 	exit shift;
@@ -33,6 +35,6 @@ while (@ARGV) {
 }
 make_path(dirname($_)) for (@topics);
 
-exec 'sensible-editor', @topics if (@topics);
+exec $editor, @topics if (@topics);
 usage(0);
 
