@@ -1,8 +1,9 @@
 #!/bin/bash
 _note() {
+	IFS="$(printf '\n\t')"
 	COMPREPLY=( $( note --complete "${COMP_WORDS[@]}" ) )
 	return 0;
 }
 
-complete -F _note note
+complete -o filenames -F _note note
 
